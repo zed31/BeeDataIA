@@ -8,4 +8,6 @@ var avg = [{
     value : [10.4, 20.8, 40.4, 55.8]
 }]
 
+var sender = require("./slackAPISender")
+sender.sendResult(8);
 console.log(avg);
