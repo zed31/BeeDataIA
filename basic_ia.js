@@ -7,5 +7,5 @@ var avg = [{
     name : "température",
     value : [10.4, 20.8, 40.4, 55.8]
 }]
-
+var influxDB = require('api_bdd_influx');
 console.log(avg);
