@@ -24,3 +24,7 @@ lol.connect({
         console.log(err);
     })
 })
+
+var sender = require("./slackAPISender")
+sender.sendResult(8);
+console.log(avg);
