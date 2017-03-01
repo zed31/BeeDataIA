@@ -22,15 +22,7 @@ const influxAPI = function(parameters) {
             database : parameters.database,
             username : parameters.username,
             password : parameters.password,
-            schema: [{
-                    measurement: parameters.nameseries,
-                    fields: {
-                        path: Influx.FieldType.STRING,
-                        duration: Influx.FieldType.INTEGER
-                    },
-                    tags: [
-                        parameters.host
-                ]}]
+            port : port
         })
         return this.influx.getDatabaseNames()
         .then(names => {
