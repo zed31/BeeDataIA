@@ -1,7 +1,7 @@
 var serializeResult = function(value, oncall) {
     var str = "";
     for (idxObj in value) {
-        str += value[idxObj].name + " " + value[idxObj].averrage;
+        str += value[idxObj].name + " " + value[idxObj].averrage + ", ";
     }
     oncall(str);
 }
