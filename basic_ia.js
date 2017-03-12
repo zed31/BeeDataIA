@@ -41,8 +41,27 @@ influxDB.connect({
                     return lhs.UID > rhs.UID ? 1 : lhs.UID < rhs.UID ? -1 : 0;
                 })
                 var slack = require('./slackAPISender');
-                var avg = require('./average').averrage(avg_final, obj => {
-                    slack.sendResult(obj);
+                require('./average').averrage(avg_final, avg_final => {
+                    var uid_available = [];
+                    avg_final.forEach(elem => {
+                        var isExist = uid_available.find(haystack => elem.UID === haystack);
+                        if (isExist == undefined) {
+                            uid_available.push(elem.UID);
+                        }
+                    })
+                    uid_available.forEach(uid => {
+                        var filter_uid = avg_final.filter(elem => elem.UID == uid);
+                        var avg = 0;
+                        filter_uid.forEach(elem => {
+                            avg += elem.averrage * elem.coeff;
+                            console.log(elem.UID, elem.averrage)
+                        })
+                        avg /= coeff.sum;
+                        console.log(avg)
+                        filter_uid.push({UID : uid, name : "Moyenne finale", averrage : avg})
+                        slack.sendResult(filter_uid);
+                        console.log("------------------------")
+                    })
                 })
             }).catch(error => console.log(error))
         }).catch(error => console.log(error))
