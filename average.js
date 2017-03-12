@@ -6,18 +6,11 @@ module.exports = {
         for (i in objs)  {
             objs[i].averrage = 0;
             for (j in objs[i].value) {
-                res += objs[i].value[j]
                 objs[i].averrage += objs[i].value[j];
             }
-            objs[i].averrage = (objs[i].averrage) / j;
-            // res = (objs[i].averrage * objs[i].coeff);
+            objs[i].averrage /= (j + 1);
             j = 0;
         }
-        // res /= 16
-        // objs[objs.length + 1] = {
-        //     name : "Moyenne finale",
-        //     averrage : res
-        // }
         callback(objs)
     }
 }
