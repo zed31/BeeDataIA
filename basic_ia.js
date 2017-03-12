@@ -52,15 +52,11 @@ influxDB.connect({
                     uid_available.forEach(uid => {
                         var filter_uid = avg_final.filter(elem => elem.UID == uid);
                         var avg = 0;
-                        filter_uid.forEach(elem => {
-                            avg += elem.averrage * elem.coeff;
-                            console.log(elem.UID, elem.averrage)
-                        })
+                        filter_uid.forEach(elem => avg += elem.averrage * elem.coeff)
                         avg /= coeff.sum;
-                        console.log(avg)
-                        filter_uid.push({UID : uid, name : "Moyenne finale", averrage : avg})
+                        filter_uid.push({UID : uid, name : "finale", averrage : avg})
                         slack.sendResult(filter_uid);
-                        console.log("------------------------")
+                        filter_uid.forEach(elem => influxDB.insertItem({name : "avg_" + elem.name, param : {UID : elem.UID, value : elem.averrage}, host : 'ia_beeData'}))
                     })
                 })
             }).catch(error => console.log(error))
