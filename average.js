@@ -1,5 +1,6 @@
-module.exports({
+module.exports = {
     averrage : function(objs, callback) {
+        console.log(objs.length)
         var i = 0;
         var res = 0;
         var j = 0;
@@ -11,15 +12,15 @@ module.exports({
                 res += objs[i].value[j]
                 objs[i].averrage += objs[i].value[j];
             }
-            objs[i].averrage = (objs[i].averrage * objs[i].coeff) / j;
-            res = res / objs[i].value.length;
+            objs[i].averrage = (objs[i].averrage) / j;
+            res = (objs[i].averrage * objs[i].coeff);
             j = 0;
         }
-        res /= objs.length;
+        res /= 16
         objs[objs.length + 1] = {
             name : "Moyenne finale",
             averrage : res
         }
         callback(objs)
     }
-})
+}

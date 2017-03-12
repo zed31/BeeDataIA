@@ -8,7 +8,9 @@ var serializeResult = function(value, oncall) {
 
 module.exports = {
     sendResult : function(value) {
+        console.log("waish")
         serializeResult(value, function(str) {
+            console.log("yeay");
             var slack = require("slack-node")
             var webhook = "https://hooks.slack.com/services/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";
             var slack = new slack();
